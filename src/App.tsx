@@ -1,26 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {Divider, Layout} from "antd";
+import {PokemonList} from "./component/pokemonList/pokemon.list";
 
-function App() {
+const { Header, Footer, Content } = Layout;
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+          <Layout style={{width: '100%'}}>
+              <Header
+                  style={{ textAlign: 'center', color: 'white' }}
+              > Poke API v2</Header>
+              <Content>
+                  <Divider />
+                  <PokemonList />
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>Ant Design ©2022 Created by Ant Mohamed Ouftou</Footer>
+          </Layout>
+      </>
   );
 }
-
 export default App;

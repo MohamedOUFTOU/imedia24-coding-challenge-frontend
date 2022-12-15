@@ -1,0 +1,4 @@
+.modalContent{
+    display: flex;
+    grid-gap: 40px;
+}
