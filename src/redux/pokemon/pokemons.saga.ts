@@ -4,9 +4,19 @@ import {fetchPokemonsFailure, fetchPokemonsSuccess} from "./pokemons.actions";
 import {FetchPokemonsRequest, PokemonActionType} from "./types";
 import {IPokemon} from "../../model/pokemon/IPokemon";
 
+
+const isFulfilled = <IPokemon>(input: PromiseSettledResult<IPokemon>): input is PromiseFulfilledResult<IPokemon> =>
+    input.status === 'fulfilled'
+
 function* fetchPokemonsSaga(action: FetchPokemonsRequest) {
     try {
-        const pokemons: IPokemon[] = yield call(getPokemons, action.payload.offset);
+        const pokemons: IPokemon[] = []
+        const apiResponse : PromiseSettledResult<IPokemon>[] = yield call(getPokemons, action.payload.offset);
+        apiResponse.forEach(
+            (promise: PromiseSettledResult<IPokemon>) => {
+                isFulfilled(promise) ? pokemons.push(promise.value): console.log(promise.reason)
+            }
+        )
         yield put(
             fetchPokemonsSuccess({
                 pokemons

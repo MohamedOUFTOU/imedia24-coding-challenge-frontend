@@ -17,7 +17,7 @@ const PokemonList : React.FC = () => {
     // TODO : Move on to tests
 
     const observer: any = useRef();
-    const lastPokemonCardRef: any = useCallback((node: ReactNode) => {
+    const lastPokemonCardRef:any = useCallback((node: ReactNode) => {
         if (loading) return
         if (observer.current) observer.current.disconnect()
         observer.current = new IntersectionObserver(entries => {
